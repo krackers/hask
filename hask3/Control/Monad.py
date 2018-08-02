@@ -75,6 +75,22 @@ def liftM(fn, m):
     return fmap(fn, m)
 
 
+@sig(H[(Monad, 'm')]/ (H/ 'a' >> t('m', 'b')) >> (H/ 'b' >> t('m', 'c')) >>
+     'a' >> t('m', 'c'))
+def kleisli_fish(f, g, x):
+    '''``(>=>) :: Monad m => (a -> m b) -> (b -> m c) -> a -> m c``
+    '''
+    return bind(f(x), g)
+
+
+@sig(H[(Monad, 'm')]/ (H/ 'b' >> t('m', 'c')) >> (H/ 'a' >> t('m', 'b')) >>
+     'a' >> t('m', 'c'))
+def kleisli_compose(g, f, x):
+    '''``(>=>) :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c``
+    '''
+    return bind(f(x), g)
+
+
 def _list_bind(x, fn):
     from itertools import chain
     from hask3.lang import L
