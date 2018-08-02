@@ -101,5 +101,9 @@ instance(Monad, List).where(
     bind = _list_bind
 )
 
+instance(Monad, str).where(
+    bind=fmap
+)
+
 
 del _list_bind, Applicative, List, instance, t, H, sig

@@ -58,6 +58,9 @@ instance(Functor, TypedFunc).where(
     fmap = TypedFunc.__mul__
 )
 
+instance(Functor, str).where(
+    fmap=lambda fn, s: ''.join(fn(ch) for ch in s)
+)
 
 del _fmap
 del instance, t, sig, H

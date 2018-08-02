@@ -36,5 +36,9 @@ instance(Applicative, List).where(
     pure = _pure
 )
 
+instance(Applicative, str).where(
+    pure=str
+)
+
 
 del instance, List, Functor, _pure

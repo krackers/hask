@@ -26,7 +26,14 @@ class TestKleisliArrows(unittest.TestCase):
         def odds(n):
             return L[(x for x in numbers(n) if x % 2)]
 
+        @sig(H/ int >> str)
+        def show(n):
+            return str(n)
+
         on1 = kleisli_fish(numbers, odds)
         on2 = kleisli_compose(odds, numbers)
-
         assert list(on1(10)) == list(on2(10))
+
+        on3 = kleisli_fish(odds, show)
+        on4 = kleisli_compose(show, odds)
+        assert list(on3(10)) == list(on4(10)) == '13579'
